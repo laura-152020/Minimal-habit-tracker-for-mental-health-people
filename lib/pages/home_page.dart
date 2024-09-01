@@ -1,7 +1,9 @@
-
+import 'package:cart/theme/theme.provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget{
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
@@ -13,7 +15,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      drawer: Drawer(),
+      drawer: Drawer(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        child: Center(
+          child: CupertinoSwitch(
+            value: Provider.of<ThemeProvider>(context).isDarkMode,
+            onChanged: (value) {
+              // Llama a toggleTheme cuando se cambia el switch
+              Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+            },
+          ),
+        ),
+      ),
     );
-  } 
+  }
 }
