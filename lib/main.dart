@@ -1,5 +1,4 @@
 import 'package:cart/database/habit_database.dart';
-import 'package:cart/models/habit.dart';
 import 'package:cart/pages/home_page.dart';
 import 'package:cart/theme/theme.provider.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +15,15 @@ void main() async{
 
 
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: const MyApp(),
+    MultiProvider(providers: [
+      //habit provider 
+      ChangeNotifierProvider(create: (context) => HabitDatabase()),
+
+      // theme provider
+      ChangeNotifierProvider(create: (context) => ThemeProvider()),
+
+    ],
+    child: const MyApp(),
     ),
   );
 }
