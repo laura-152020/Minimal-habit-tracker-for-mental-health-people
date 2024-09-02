@@ -1,9 +1,20 @@
+import 'package:cart/database/habit_database.dart';
+import 'package:cart/models/habit.dart';
 import 'package:cart/pages/home_page.dart';
 import 'package:cart/theme/theme.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main(){
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // initialize database
+  await HabitDatabase.initialize();
+  await HabitDatabase().saveFirstLaunchDate();
+
+
+
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
